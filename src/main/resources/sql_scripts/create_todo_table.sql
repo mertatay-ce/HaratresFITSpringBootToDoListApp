@@ -1,0 +1,15 @@
+CREATE TABLE `todo`(
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(50) NOT NULL,
+    `description` VARCHAR(200) NOT NULL,
+    `created_date` DATE NOT NULL,
+    `image_url` VARCHAR(300) DEFAULT NULL,
+	`state_id` int DEFAULT NULL,
+    PRIMARY KEY (`id`),
+
+    CONSTRAINT `FK_STATE`
+    FOREIGN KEY (`state_id`)
+    REFERENCES `state` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
