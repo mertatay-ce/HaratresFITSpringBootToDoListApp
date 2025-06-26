@@ -1,1 +1,0 @@
-INSERT INTO `users` (`first_name`,`last_name`,`gender`,`birth_date`,`email`,`telephone_number`,`username`,`password`,`active`) VALUES ('Mert','Atay','Erkek','2000-05-06','ce.mertatay@gmail.com','05467248927','mertatay','{noop}test123',1);
