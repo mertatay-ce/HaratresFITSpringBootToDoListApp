@@ -12,7 +12,7 @@ public class TodoItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false,length=11)
+    @Column(name = "id",nullable = false)
     @NotNull(message = "Todo item id is not be empty.")
     private int id;
 
@@ -20,7 +20,7 @@ public class TodoItem {
     @NotNull(message = "Todo item message is not be empty.")
     private String title;
 
-    @Column(name="description",nullable = false,length = 300)
+    @Column(name="description",nullable = false,length = 1000)
     @NotNull(message = "Todo item description is not be empty.")
     private String description;
 
@@ -33,7 +33,7 @@ public class TodoItem {
     private String image_url;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "state", nullable = false,length = 20)
+    @Column(name = "state", nullable = false)
     @NotNull(message = "Todo item's state is not stateless. Please check the state of todo items's task.")
     private TodoState state;
 

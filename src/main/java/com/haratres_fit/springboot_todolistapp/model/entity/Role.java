@@ -1,9 +1,9 @@
 package com.haratres_fit.springboot_todolistapp.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,12 +11,12 @@ import java.util.List;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",length = 11)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "role_name",length = 20,nullable = false)
-    @NotNull(message = "User's role must have one role!")
-    private String role;
+    @NotNull(message = "User's name must have one name!")
+    private String name;
 
     public List<User> getUsers() {
         return users;
@@ -26,14 +26,14 @@ public class Role {
         this.users = users;
     }
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
     private List<User> users;
 
     public Role() {
     }
 
     public Role(String role) {
-        this.role = role;
+        this.name = role;
     }
 
     public int getId() {
@@ -44,28 +44,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", name='" + name + '\'' +
                 '}';
-    }
-    public void addUser(User theAppUser) {
-
-        if (users == null) {
-            users = new ArrayList<>();
-        }
-
-        users.add(theAppUser);
-        theAppUser.addRole(this);
     }
 }

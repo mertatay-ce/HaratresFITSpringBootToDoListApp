@@ -1,88 +1,57 @@
-package com.haratres_fit.springboot_todolistapp.model.entity;
+package com.haratres_fit.springboot_todolistapp.dto.userdto;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class RegisterUserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false,unique = true)
-    @NotNull(message = "User id must have id.")
-    private int id;
-
-    @Column(name="first_name",nullable = false,length = 50)
     @NotNull(message = "User first name is required.")
-    @Size(min = 1, max=50, message = "First name using min 1 character, max 50 character.")
+    @Size(min = 1,max=50,message = "First name using min 1 character, max 50 character.")
     private String firstName;
 
-    @Column(name="last_name",nullable = false,length = 50)
+
     @NotNull(message = "User last name is required.")
     @Size(min = 1,max=50,message = "Last name using min 1 character, max 50 character.")
     private String lastName;
 
-    @Column(name="username",nullable = false,unique = true,length = 50)
+
     @NotNull(message = "Username is required.")
     @Size(min = 1,max=50,message = "Username min 1 character, max 50 character.")
     private String username;
 
-    @Column(name = "password", nullable = false,length = 68)
+
     @NotNull(message = "Password is required.")
     @Size(min = 8,max=68,message = "Password using min 8 character, max 68 character.")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender",nullable = true)
+
     private Gender gender;
 
-    @Column(name = "birth_date",nullable = false)
+
     @NotNull(message = "User birth date is required.")
     private LocalDate birthDate;
 
-    @Column(name = "email",nullable = false,length = 200)
+
     @NotNull(message = "Email address is required.")
     @Size(min = 1, max = 200, message = "Email must be between 1 and 200 characters")
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
 
-    @Column(name = "telephone_number",nullable = false,length = 20)
+
     @NotNull(message = "Telephone number is required.")
-    @Size(min = 1, max=20, message = "Telephone number using min 1 character, max 20 character.")
+    @Size(min = 1,max=20,message = "Telephone number using min 1 character, max 20 character.")
     private String telephone_number;
 
-    @Column(name = "is_active",nullable = false)
+
+
     private boolean active;
 
-
-    public List<Role> getRoles() {
-        return roles;
+    public RegisterUserDto() {
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles;
-
-    public User() {
-    }
-
-    public User(String firstName, String lastName, String username, String password, Gender gender, LocalDate birthDate, String email, String telephone_number, boolean active) {
+    public RegisterUserDto(String firstName, String lastName, String username, String password, Gender gender, LocalDate birthDate, String email, String telephone_number, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -92,14 +61,6 @@ public class User {
         this.email = email;
         this.telephone_number = telephone_number;
         this.active = active;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -176,8 +137,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return "RegisterUserDto{" +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
@@ -189,5 +149,4 @@ public class User {
                 ", active=" + active +
                 '}';
     }
-
 }
