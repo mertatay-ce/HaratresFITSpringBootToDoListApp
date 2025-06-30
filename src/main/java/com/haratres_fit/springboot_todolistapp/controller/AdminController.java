@@ -1,5 +1,7 @@
 package com.haratres_fit.springboot_todolistapp.controller;
 import com.haratres_fit.springboot_todolistapp.dto.userdto.RegisterUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.userdto.UserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
 import com.haratres_fit.springboot_todolistapp.service.UserService;
 import jakarta.validation.Valid;
@@ -21,10 +23,10 @@ public class AdminController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<User> createAdministrator(@Valid @RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<ResultUserDto> createAdministrator(@Valid @RequestBody RegisterUserDto registerUserDto) {
         User createdAdmin = userService.createAdministrator(registerUserDto);
-
-        return ResponseEntity.ok(createdAdmin);
+        ResultUserDto res = userService.getUserInfo(createdAdmin);
+        return ResponseEntity.ok(res);
     }
 }
 

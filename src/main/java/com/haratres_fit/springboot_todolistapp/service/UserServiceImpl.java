@@ -1,6 +1,8 @@
 package com.haratres_fit.springboot_todolistapp.service;
 
 import com.haratres_fit.springboot_todolistapp.dto.userdto.RegisterUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultAuthUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultUserDto;
 import com.haratres_fit.springboot_todolistapp.dto.userdto.UserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.Role;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
@@ -8,8 +10,10 @@ import com.haratres_fit.springboot_todolistapp.repository.RoleRepository;
 import com.haratres_fit.springboot_todolistapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -124,6 +128,21 @@ public class UserServiceImpl implements UserService {
 
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public ResultUserDto getUserInfo(User user) {
+        User tempUser = userRepository.findByUserName(user.getUsername());
+        return modelMapper.map(tempUser, ResultUserDto.class);
+    }
+
+    @Override
+    public ResultAuthUserDto getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        org.springframework.security.core.userdetails.User currentUser = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+
+        return modelMapper.map(currentUser,ResultAuthUserDto.class);
     }
 
 

@@ -2,6 +2,8 @@ package com.haratres_fit.springboot_todolistapp.bootstrap;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.Role;
 import com.haratres_fit.springboot_todolistapp.repository.RoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,8 +15,8 @@ import java.util.*;
 public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RoleRepository roleRepository;
+    private static final Logger log = LoggerFactory.getLogger(RoleSeeder.class);
 
-    @Autowired
     public RoleSeeder(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
@@ -39,6 +41,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
                 roleToCreate.setName(tempRole.getName());
 
                 roleRepository.save(roleToCreate);
+                log.info("Loaded roles from RoleSeeder.java: {}", roleToCreate.getName().toString());
             });
         }
     }

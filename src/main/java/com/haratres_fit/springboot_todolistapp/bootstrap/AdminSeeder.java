@@ -8,6 +8,8 @@ import com.haratres_fit.springboot_todolistapp.repository.RoleRepository;
 import com.haratres_fit.springboot_todolistapp.repository.UserRepository;
 import com.haratres_fit.springboot_todolistapp.service.RoleService;
 import com.haratres_fit.springboot_todolistapp.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -23,7 +25,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final UserService userService;
-
+    private static final Logger log = LoggerFactory.getLogger(AdminSeeder.class);
     @Autowired
     public AdminSeeder(
             RoleRepository roleRepository,
@@ -52,7 +54,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
         userDto.setPassword("test123");
         userDto.setEmail("mertatay41@gmail.com");
 
-        System.out.println(userDto);
+        log.info("RegisterUserDto:{}", userDto);
 
         Optional<Role> optionalRole = roleRepository.findByName("ROLE_ADMIN");
         Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
@@ -71,10 +73,11 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
             adminToCreate.setEmail("mertatay41@gmail.com");
 
             roleService.addUser(optionalRole.get().getName(),adminToCreate);
-            System.out.println(adminToCreate);
-            System.out.println(adminToCreate.getRoles());
+
             userRepository.save(adminToCreate);
 
+            log.warn("User has been created : {}",adminToCreate);
+            log.warn("User having this roles: {}",adminToCreate.getRoles().toString());
         });
 
 

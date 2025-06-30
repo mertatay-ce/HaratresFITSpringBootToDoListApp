@@ -1,5 +1,7 @@
 package com.haratres_fit.springboot_todolistapp.controller;
 
+import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultAuthUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultUserDto;
 import com.haratres_fit.springboot_todolistapp.dto.userdto.UserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
 import com.haratres_fit.springboot_todolistapp.security.ToDoListAuthenticationProvider;
@@ -19,25 +21,20 @@ import java.util.List;
 @RestController
 public class UserController {
     private final UserService userService;
-    private final ToDoListAuthenticationProvider toDoListAuthenticationProvider;
 
-    public UserController(UserService userService, ToDoListAuthenticationProvider toDoListAuthenticationProvider) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.toDoListAuthenticationProvider = toDoListAuthenticationProvider;
     }
 
     @GetMapping("/me")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<org.springframework.security.core.userdetails.User> authenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        org.springframework.security.core.userdetails.User currentUser = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-
-        return ResponseEntity.ok(currentUser);
+    @PreAuthorize("isAuthenticated() && hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<ResultAuthUserDto> authenticatedUser() {
+        ResultAuthUserDto currentUserDto = userService.getAuthenticatedUser();
+        return ResponseEntity.ok(currentUserDto);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<List<UserDto>> allUsers() {
         List <UserDto> users = userService.allUsers();
 
