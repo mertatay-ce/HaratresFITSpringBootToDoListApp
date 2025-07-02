@@ -1,7 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.exception;
 
 import com.haratres_fit.springboot_todolistapp.exception.model.ErrorResponse;
-import jakarta.validation.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

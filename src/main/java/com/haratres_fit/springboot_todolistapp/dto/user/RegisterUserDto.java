@@ -1,7 +1,10 @@
-package com.haratres_fit.springboot_todolistapp.dto.userdto;
+package com.haratres_fit.springboot_todolistapp.dto.user;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 

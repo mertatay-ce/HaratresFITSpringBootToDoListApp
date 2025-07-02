@@ -1,46 +1,22 @@
-package com.haratres_fit.springboot_todolistapp.model.entity;
+package com.haratres_fit.springboot_todolistapp.dto.todo;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.TodoState;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "todo")
-public class TodoItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
-    @NotNull(message = "Todo item id is not be empty.")
+public class ResultTodoListDto {
     private int id;
-
-    @Column(name="title", nullable = false, length = 50)
-    @NotNull(message = "Todo item message is not be empty.")
     private String title;
-
-    @Column(name="description",nullable = false,length = 1000)
-    @NotNull(message = "Todo item description is not be empty.")
     private String description;
-
-    @Column(name = "created_date",nullable = false)
-    @NotNull(message = "Todo item's created date is not be empty.")
     private LocalDateTime createdDate;
-
-    @Column(name = "image_url", nullable = true,length = 300)
-    @NotNull(message = "Todo item image url is entering nullable.")
     private String image_url;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "state", nullable = false)
-    @NotNull(message = "Todo item's state is not stateless. Please check the state of todo items's task.")
     private TodoState state;
 
-    public TodoItem() {
+    public ResultTodoListDto() {
     }
 
-    public TodoItem(String title, String description, LocalDateTime createdDate, String image_url, TodoState state) {
+    public ResultTodoListDto(int id, String title, String description, LocalDateTime createdDate, String image_url, TodoState state) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.createdDate = createdDate;
@@ -98,13 +74,13 @@ public class TodoItem {
 
     @Override
     public String toString() {
-        return "TodoItem{" +
+        return "ResultTodoListDto{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", createdDate=" + createdDate +
                 ", image_url='" + image_url + '\'' +
-                ", state=" + state.name() +
+                ", state=" + state +
                 '}';
     }
 }

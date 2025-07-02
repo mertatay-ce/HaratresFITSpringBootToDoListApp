@@ -1,20 +1,14 @@
-package com.haratres_fit.springboot_todolistapp.model.entity;
+package com.haratres_fit.springboot_todolistapp.dto.todo;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.TodoState;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "todo")
-public class TodoItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
-    @NotNull(message = "Todo item id is not be empty.")
-    private int id;
+public class CreateTodoDto {
 
     @Column(name="title", nullable = false, length = 50)
     @NotNull(message = "Todo item message is not be empty.")
@@ -37,23 +31,15 @@ public class TodoItem {
     @NotNull(message = "Todo item's state is not stateless. Please check the state of todo items's task.")
     private TodoState state;
 
-    public TodoItem() {
+    public CreateTodoDto() {
     }
 
-    public TodoItem(String title, String description, LocalDateTime createdDate, String image_url, TodoState state) {
+    public CreateTodoDto(String title, String description, LocalDateTime createdDate, String image_url, TodoState state) {
         this.title = title;
         this.description = description;
         this.createdDate = createdDate;
         this.image_url = image_url;
         this.state = state;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -98,13 +84,12 @@ public class TodoItem {
 
     @Override
     public String toString() {
-        return "TodoItem{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+        return "CreateTodoDto{" +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", createdDate=" + createdDate +
                 ", image_url='" + image_url + '\'' +
-                ", state=" + state.name() +
+                ", state=" + state +
                 '}';
     }
 }

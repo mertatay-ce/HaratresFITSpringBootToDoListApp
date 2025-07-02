@@ -1,4 +1,4 @@
-package com.haratres_fit.springboot_todolistapp.dto.userdto;
+package com.haratres_fit.springboot_todolistapp.dto.user;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
 

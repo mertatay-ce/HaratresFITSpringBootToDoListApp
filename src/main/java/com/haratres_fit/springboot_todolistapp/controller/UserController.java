@@ -1,15 +1,10 @@
 package com.haratres_fit.springboot_todolistapp.controller;
 
-import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultAuthUserDto;
-import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultUserDto;
-import com.haratres_fit.springboot_todolistapp.dto.userdto.UserDto;
-import com.haratres_fit.springboot_todolistapp.model.entity.User;
-import com.haratres_fit.springboot_todolistapp.security.ToDoListAuthenticationProvider;
+import com.haratres_fit.springboot_todolistapp.dto.user.ResultAuthUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.user.UserDto;
 import com.haratres_fit.springboot_todolistapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
