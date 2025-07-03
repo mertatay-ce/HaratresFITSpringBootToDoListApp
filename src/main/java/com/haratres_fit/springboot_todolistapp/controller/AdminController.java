@@ -1,7 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.controller;
-import com.haratres_fit.springboot_todolistapp.dto.userdto.RegisterUserDto;
-import com.haratres_fit.springboot_todolistapp.dto.userdto.ResultUserDto;
-import com.haratres_fit.springboot_todolistapp.dto.userdto.UserDto;
+import com.haratres_fit.springboot_todolistapp.dto.user.RegisterUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.user.ResultUserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
 import com.haratres_fit.springboot_todolistapp.service.UserService;
 import jakarta.validation.Valid;

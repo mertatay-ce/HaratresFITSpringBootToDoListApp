@@ -1,7 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.repository;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.Role;
-import com.haratres_fit.springboot_todolistapp.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -2,12 +2,12 @@ package com.haratres_fit.springboot_todolistapp.model.entity;
 
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity

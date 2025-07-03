@@ -1,6 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.bootstrap;
 
-import com.haratres_fit.springboot_todolistapp.dto.userdto.RegisterUserDto;
+import com.haratres_fit.springboot_todolistapp.dto.user.RegisterUserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.Role;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
 import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
