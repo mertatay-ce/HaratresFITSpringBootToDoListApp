@@ -1,6 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.security;
 
-import com.haratres_fit.springboot_todolistapp.service.UserServiceImpl;
+import com.haratres_fit.springboot_todolistapp.service.UserService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ToDoListAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
 
-    public ToDoListAuthenticationProvider(UserServiceImpl userService) {
+    public ToDoListAuthenticationProvider(UserService userService) {
         this.userService = userService;
     }
 

@@ -25,7 +25,7 @@ public class Role {
         this.users = users;
     }
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH})
     private List<User> users;
 
     public Role() {

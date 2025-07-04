@@ -1,6 +1,7 @@
 package com.haratres_fit.springboot_todolistapp.model.entity;
 
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.user.Gender;
+import com.haratres_fit.springboot_todolistapp.model.entity.security.OtpToken;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -62,6 +63,10 @@ public class User {
     @Column(name = "is_active",nullable = false)
     private boolean active;
 
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,
+            CascadeType.MERGE})
+    private OtpToken otpToken;
+
 
     public List<Role> getRoles() {
         return roles;
@@ -71,6 +76,7 @@ public class User {
         this.roles = roles;
     }
 
+    //TODO: cascade typelara bak - null setleme durumu olmadan rol kaldırma durumunda user için Cascade delete işlemine tabi olmamasını engelle
     @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinTable(
             name = "users_roles",
@@ -82,7 +88,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String password, Gender gender, LocalDate birthDate, String email, String telephone_number, boolean active) {
+    public User(String firstName, String lastName, String username, String password, Gender gender, LocalDate birthDate, String email, String telephone_number, boolean active, OtpToken otpToken) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -92,6 +98,7 @@ public class User {
         this.email = email;
         this.telephone_number = telephone_number;
         this.active = active;
+        this.otpToken = otpToken;
     }
 
     public int getId() {
@@ -190,4 +197,11 @@ public class User {
                 '}';
     }
 
+    public OtpToken getOtpToken() {
+        return otpToken;
+    }
+
+    public void setOtpToken(OtpToken otpToken) {
+        this.otpToken = otpToken;
+    }
 }

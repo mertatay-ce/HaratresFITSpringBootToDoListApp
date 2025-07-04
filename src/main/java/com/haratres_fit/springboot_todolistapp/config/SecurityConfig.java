@@ -1,7 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.config;
 
 import com.haratres_fit.springboot_todolistapp.security.ToDoListAuthenticationProvider;
-import com.haratres_fit.springboot_todolistapp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -20,12 +22,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final UserServiceImpl userService;
+
     private final ToDoListAuthenticationProvider toDoListAuthenticationProvider;
 
     @Autowired
-    public SecurityConfig(UserServiceImpl userService, ToDoListAuthenticationProvider toDoListAuthenticationProvider) {
-        this.userService = userService;
+    public SecurityConfig(ToDoListAuthenticationProvider toDoListAuthenticationProvider) {
         this.toDoListAuthenticationProvider = toDoListAuthenticationProvider;
     }
 
@@ -40,14 +41,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.anyRequest()
-                        .authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .build();
+        http.csrf(AbstractHttpConfigurer::disable)
+                    .authorizeHttpRequests(request -> request.requestMatchers("/register","update-password").permitAll()
+                            //.requestMatchers("/update-password").authenticated()
+                            .anyRequest().permitAll())
+                    .formLogin(formLogin ->
+                        formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/home", true)
+                                .permitAll())
+                    .logout(LogoutConfigurer::permitAll)
+                    .httpBasic(Customizer.withDefaults());
+
+        return http.build();
     }
 
+    @Bean PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
 
 }

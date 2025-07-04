@@ -1,6 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.dto.user;
 
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.user.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -46,8 +46,6 @@ public class RegisterUserDto {
     @NotNull(message = "Telephone number is required.")
     @Size(min = 1,max=20,message = "Telephone number using min 1 character, max 20 character.")
     private String telephone_number;
-
-
 
     private boolean active;
 

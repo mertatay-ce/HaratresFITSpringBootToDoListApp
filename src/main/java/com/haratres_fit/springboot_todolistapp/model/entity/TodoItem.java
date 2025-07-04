@@ -1,6 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.model.entity;
 
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.TodoState;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.todo.TodoState;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 

@@ -1,6 +1,6 @@
 package com.haratres_fit.springboot_todolistapp.dto.todo;
 
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.TodoState;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.todo.TodoState;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

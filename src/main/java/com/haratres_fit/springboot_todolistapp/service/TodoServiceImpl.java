@@ -2,7 +2,7 @@ package com.haratres_fit.springboot_todolistapp.service;
 
 import com.haratres_fit.springboot_todolistapp.dto.todo.*;
 import com.haratres_fit.springboot_todolistapp.model.entity.TodoItem;
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.TodoState;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.todo.TodoState;
 import com.haratres_fit.springboot_todolistapp.repository.TodoRepository;
 import com.haratres_fit.springboot_todolistapp.repository.specifications.todo.TodoSpecification;
 import org.modelmapper.ModelMapper;

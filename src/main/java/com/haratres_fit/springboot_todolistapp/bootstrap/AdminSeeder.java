@@ -3,16 +3,16 @@ package com.haratres_fit.springboot_todolistapp.bootstrap;
 import com.haratres_fit.springboot_todolistapp.dto.user.RegisterUserDto;
 import com.haratres_fit.springboot_todolistapp.model.entity.Role;
 import com.haratres_fit.springboot_todolistapp.model.entity.User;
-import com.haratres_fit.springboot_todolistapp.model.entity.enums.Gender;
+import com.haratres_fit.springboot_todolistapp.model.entity.enums.user.Gender;
 import com.haratres_fit.springboot_todolistapp.repository.RoleRepository;
 import com.haratres_fit.springboot_todolistapp.repository.UserRepository;
 import com.haratres_fit.springboot_todolistapp.service.RoleService;
-import com.haratres_fit.springboot_todolistapp.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -24,17 +24,18 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final RoleService roleService;
-    private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(AdminSeeder.class);
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public AdminSeeder(
             RoleRepository roleRepository,
-            UserRepository  userRepository, RoleService roleService, UserService userService
+            UserRepository  userRepository, RoleService roleService
     ) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.roleService = roleService;
-        this.userService = userService;
+
     }
 
     @Override
@@ -69,8 +70,9 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
             adminToCreate.setTelephone_number("05467289221");
             adminToCreate.setActive(true);
             adminToCreate.setUsername("mertatay");
-            adminToCreate.setPassword("test123");
+            adminToCreate.setPassword(passwordEncoder.encode("test123"));
             adminToCreate.setEmail("mertatay41@gmail.com");
+            adminToCreate.setOtpToken(null);
 
             roleService.addUser(optionalRole.get().getName(),adminToCreate);
 
